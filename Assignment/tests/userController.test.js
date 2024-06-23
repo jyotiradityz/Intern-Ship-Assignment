@@ -4,9 +4,8 @@ const dotenv = require('dotenv');
 const User = require('../src/models/userModel');
 const app = require('../src/app');
 
-// Load environment variables
 dotenv.config();
-console.log('MONGO_URI:', process.env.MONGO_URI); // Check the MONGO_URI value
+console.log('MONGO_URI:', process.env.MONGO_URI); 
 
 describe('User API', () => {
   beforeAll(async () => {
