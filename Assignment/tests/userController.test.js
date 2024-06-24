@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const User = require('../src/models/userModel');
 const app = require('../src/app');
+const authToken="yourToken"
 
 dotenv.config();
 console.log('MONGO_URI:', process.env.MONGO_URI); 
@@ -23,7 +24,7 @@ describe('User API', () => {
   it('should create a new user', async () => {
     const res = await request(app)
       .post('/worko/user')
-      .set('Authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Njc4MTFkYWMwNjJkNTk4NDBiMDYzMzAiLCJpYXQiOjE3MTkxNDQ5MjIsImV4cCI6MTcxOTE0ODUyMn0.AjyUFWsahGgDfDO_BKavCZAwWNli3EMagbjF-4ceIPo') // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Njc4MTFkYWMwNjJkNTk4NDBiMDYzMzAiLCJpYXQiOjE3MTkxNDQ5MjIsImV4cCI6MTcxOTE0ODUyMn0.AjyUFWsahGgDfDO_BKavCZAwWNli3EMagbjF-4ceIPo with a valid token
+      .set('Authorization', authToken) 
       .send({
         email: 'test@example.com',
         name: 'Test User',
@@ -48,7 +49,7 @@ describe('User API', () => {
 
     const res = await request(app)
       .get('/worko/user')
-      .set('Authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Njc4MTFkYWMwNjJkNTk4NDBiMDYzMzAiLCJpYXQiOjE3MTkxNDQ5MjIsImV4cCI6MTcxOTE0ODUyMn0.AjyUFWsahGgDfDO_BKavCZAwWNli3EMagbjF-4ceIPo'); // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Njc4MTFkYWMwNjJkNTk4NDBiMDYzMzAiLCJpYXQiOjE3MTkxNDQ5MjIsImV4cCI6MTcxOTE0ODUyMn0.AjyUFWsahGgDfDO_BKavCZAwWNli3EMagbjF-4ceIPo with a valid token
+      .set('Authorization', authToken); 
 
     expect(res.statusCode).toEqual(200);
     expect(res.body.length).toBe(1);
@@ -67,7 +68,7 @@ describe('User API', () => {
 
     const res = await request(app)
       .get(`/worko/user/${user._id}`)
-      .set('Authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Njc4MTFkYWMwNjJkNTk4NDBiMDYzMzAiLCJpYXQiOjE3MTkxNDQ5MjIsImV4cCI6MTcxOTE0ODUyMn0.AjyUFWsahGgDfDO_BKavCZAwWNli3EMagbjF-4ceIPo'); // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Njc4MTFkYWMwNjJkNTk4NDBiMDYzMzAiLCJpYXQiOjE3MTkxNDQ5MjIsImV4cCI6MTcxOTE0ODUyMn0.AjyUFWsahGgDfDO_BKavCZAwWNli3EMagbjF-4ceIPo with a valid token
+      .set('Authorization', authToken); 
 
     expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty('email', 'test3@example.com');
@@ -110,7 +111,7 @@ describe('User API', () => {
 
     const res = await request(app)
       .delete(`/worko/user/${user._id}`)
-      .set('Authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Njc4MTFkYWMwNjJkNTk4NDBiMDYzMzAiLCJpYXQiOjE3MTkxNDQ5MjIsImV4cCI6MTcxOTE0ODUyMn0.AjyUFWsahGgDfDO_BKavCZAwWNli3EMagbjF-4ceIPo'); // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Njc4MTFkYWMwNjJkNTk4NDBiMDYzMzAiLCJpYXQiOjE3MTkxNDQ5MjIsImV4cCI6MTcxOTE0ODUyMn0.AjyUFWsahGgDfDO_BKavCZAwWNli3EMagbjF-4ceIPo with a valid token
+      .set('Authorization', authToken); 
 
     expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty('email', 'test5@example.com');
